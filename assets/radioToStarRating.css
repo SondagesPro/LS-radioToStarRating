@@ -1,0 +1,37 @@
+/*!
+ * Style for radio star
+ *
+ * Copyright 2016 Denis Chenu <http://www.sondages.pro>
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+.radioToStarRating .colstyle-ul {float:left;display:inline-block;width:auto}
+.radioToStarRating .radio-item{float:left;display:inline-block}
+.radioToStarRating .radio-item .answer-item
+  {display:block;float:left}
+.radioToStarRating .radio-item .answer-item
+{
+  padding-left: 0;padding-right: 0;
+}
+.radioToStarRating .radio-item label
+{
+  display:block;
+}
+.radioToStarRating .radio-item .other-item .checkbox
+{
+  display:none;
+}
+.radioToStarRating .radio-item .other-item label
+{
+  display:block;margin:0;
+}
+
+.radiostar-rating.fa{font-size:3em}
+.radiostar-rating{cursor:pointer}
+
+.radiostar-cancel{color:#CCC}
+.radiostar-cancel:hover{color: #a94442;}
+.radiostar{color:#337ab7}
+.radiostar-rated{color:#31708f;}
+
