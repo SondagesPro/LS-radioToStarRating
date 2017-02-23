@@ -13,7 +13,7 @@
  */
 
 /**
- * Update answers part for Star rating
+ * Update answers part for Star rating (single radio question)
  *
  * @author Denis Chenu (Shnoulle)
  * @param {number} qId The qid of the question where apply.
@@ -23,12 +23,9 @@ function doRadioToStarRating(qID) {
   //~ // Return quick
   var answersList=$('#question'+qID+' input.radio').closest('.radio-list:not(.starred-list)');
   if(!answersList){return;}
-//~ console.log(answersList);
-  //~ return;
-  //~ // See to http://www.visualjquery.com/rating/rating_redux.html
-  if ((!$.support.opacity && !$.support.style)) try { document.execCommand("BackgroundImageCache", false, true)} catch(e) { };
 
-  var asNoAnswer=$('#question'+qID+' .noanswer-item input.radio').length;
+  var asNoAnswer=$('#question'+qID+' .noanswer-item .radio, #question'+qID+' .no-anwser-item input:radio').length;
+  console.log(asNoAnswer);
   var starsHtmlElement="<div class='radiostars-list answers-list noread' aria-hidden='true'>";
   if(asNoAnswer){ starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";}
   $('#question'+qID+' input.radio').each(function(){
@@ -56,20 +53,18 @@ function doRadioToStarRating(qID) {
 
     }
   });
+  /* Click on star events */
   starsElement.on("click", ".radiostar", function(event){
     var thisnum=$(this).index();
     var thischoice=$(this).data("value");
     answersList.find("input.radio[value='"+thischoice+"']").click();
-    //~ starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o").addClass("radiostar-rated fa-star");
-    //~ starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o").addClass("radiostar-rated radiostar-rated-on fa-star");
-    //~ starsElement.children('.radiostar:gt('+thisnum+')').removeClass("radiostar-rated fa-star radiostar-rated-on").addClass("fa-star-o")
 
   });
   starsElement.on("click", ".radiostar-cancel", function(event){
-    //~ starsElement.children('.radiostar').removeClass("radiostar-rated fa-star").addClass("fa-star-o")
     answersList.find("input.radio[value='']").click();
   });
-  $('#question'+qID+' .answers-list.radio-list').addClass("starred-list hide sr-only");
+
+  $('#question'+qID+' .answers-list.radio-list').addClass("starred-list");
   var openValue=answersList.find("input:radio:checked").val();
   if(answersList.find("input:radio:checked").length && openValue!=""){
     var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
@@ -89,4 +84,17 @@ function doRadioToStarRating(qID) {
       starsElement.children('.radiostar').removeClass("radiostar-rated  fa-star radiostar-rated-on").addClass("fa-star-o");
     }
   });
+}
+
+/**
+ * Update answers part for Star rating (array dropdown question)
+ *
+ * @author Denis Chenu (Shnoulle)
+ * @param {number} qId The qid of the question where apply.
+ */
+function doArrayToStarRating(qID) {
+  //~ // Return quick
+  var answersList=$('#question'+qID+' input.radio').closest('.radio-list:not(.starred-list)');
+  if(!answersList){return;}
+  console.log(answersList);
 }

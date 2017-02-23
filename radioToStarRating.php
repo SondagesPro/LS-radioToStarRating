@@ -27,6 +27,7 @@ class radioToStarRating extends PluginBase {
     public function init()
     {
         $this->subscribe('beforeQuestionRender');
+        $this->subscribe('newQuestionAttributes','addStarRatingAttribute');
     }
 
     public function beforeQuestionRender()
@@ -36,18 +37,82 @@ class radioToStarRating extends PluginBase {
         {
             $oAttributeDisplayColumns=QuestionAttribute::model()->find("qid=:qid AND attribute=:attribute",array(":qid"=>$oEvent->get('qid'),":attribute"=>"display_columns"));
             $oAttributeCssClass=QuestionAttribute::model()->find("qid=:qid AND attribute=:attribute",array(":qid"=>$oEvent->get('qid'),":attribute"=>"cssclass"));
+            $oAttributeStarRating=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'radioToStarRating'));
 
-            if( ($oAttributeDisplayColumns && trim($oAttributeDisplayColumns->value)=="star") || ($oAttributeCssClass && (trim($oAttributeCssClass->value)=="starRating")) )
+            if( ($oAttributeStarRating && $oAttributeStarRating->value) || ($oAttributeDisplayColumns && trim($oAttributeDisplayColumns->value)=="star") || ($oAttributeCssClass && (trim($oAttributeCssClass->value)=="starRating")) )
             {
-                /* @todo must be fixed for 2.50 */
-                $sFontAsset=App()->assetManager->publish(App()->getConfig('rootdir').'/third_party/font-awesome');
-                App()->getClientScript()->registerCssFile($sFontAsset. '/css/font-awesome.css');
+                $this->registerFontAwesome();
                 App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
                 App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
                 App()->clientScript->registerScript("radioToStarRating{$oEvent->get('qid')}","doRadioToStarRating({$oEvent->get('qid')})",CClientScript::POS_END);
                 $oEvent->set('class',$oEvent->get('class')." radioToStarRating");
-
             }
         }
+        if($oEvent->get('type')=="F") {
+            $this->registerFontAwesome();
+        }
+    }
+
+    /**
+     * register then Font awesome is not already registered
+     */
+    private function registerFontAwesome()
+    {
+        if(!array_key_exists('fontawesome',Yii::app()->getClientScript()->packages)){
+            $sFontAsset=App()->assetManager->publish(App()->getConfig('rootdir').'/third_party/font-awesome');
+            App()->getClientScript()->registerCssFile($sFontAsset. '/css/font-awesome.css');
+        }
+    }
+
+    /**
+     * Add the question settings
+     * @see event newQuestionAttributes
+     */
+    public function addStarRatingAttribute()
+    {
+        $radioToStarRatingAttributes = array(
+            'radioToStarRating'=>array(
+                'types'=>'LF', /* Radio + Array radio */
+                'category'=>gT('Display'),
+                'sortorder'=>150,
+                'inputtype'=>'switch',
+                'default'=>0,
+                'help'=>$this->_translate('Tou need to check use dropdown attribute too.'),
+                'caption'=>$this->_translate('Show like a star rating.'),
+            ),
+        );
+        if(method_exists($this->getEvent(),'append')) {
+            $this->getEvent()->append('questionAttributes', $radioToStarRatingAttributes);
+        } else {
+            $questionAttributes=(array)$this->event->get('questionAttributes');
+            $questionAttributes=array_merge($questionAttributes,$radioToStarRatingAttributes);
+            $this->event->set('questionAttributes',$radioToStarRatingAttributes);
+        }
+    }
+
+    /**
+     * Translate a plugin string
+     * @param string $string to translate
+     * @return string
+     */
+    private function _translate($string){
+        return Yii::t('',$string,array(),'radioToStarRating');
+    }
+    /**
+     * Add this translation just after loaded all plugins
+     * @see event afterPluginLoad
+     */
+    public function afterPluginLoad(){
+        // messageSource for this plugin:
+        $messageMaintenanceMode=array(
+            'class' => 'CGettextMessageSource',
+            'cacheID' => 'radioToStarRatingLang',
+            'cachingDuration'=>3600,
+            'forceTranslation' => true,
+            'useMoFile' => true,
+            'basePath' => __DIR__ . DIRECTORY_SEPARATOR.'locale',
+            'catalog'=>'messages',// default from Yii
+        );
+        Yii::app()->setComponent('radioToStarRating',$messageMaintenanceMode);
     }
 }
