@@ -50,6 +50,11 @@ class radioToStarRating extends PluginBase {
         }
         if($oEvent->get('type')=="F") {
             $this->registerFontAwesome();
+            $this->registerFontAwesome();
+            App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
+            App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
+            App()->clientScript->registerScript("arrayToStarRating{$oEvent->get('qid')}","doArrayToStarRating({$oEvent->get('qid')})",CClientScript::POS_END);
+            $oEvent->set('class',$oEvent->get('class')." radioToStarRating");
         }
     }
 
