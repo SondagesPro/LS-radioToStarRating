@@ -26,7 +26,9 @@ function doRadioToStarRating(qID) {
 
   var asNoAnswer=$('#question'+qID+' .noanswer-item .radio, #question'+qID+' .no-anwser-item input:radio').length;
   var starsHtmlElement="<div class='radiostars-list answers-list noread' aria-hidden='true'>";
-  if(asNoAnswer){ starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";}
+  if(asNoAnswer){
+    starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";
+  }
   $('#question'+qID+' input.radio').each(function(){
     if($(this).attr("value").trim()!=""){
       if($("[id='label-"+$(this).attr('id')+"']").length){
@@ -102,15 +104,20 @@ function doArrayToStarRating(qID) {
   //~ // Return quick
   var answersItems=$('#question'+qID+' .dropdown-item:not(.starred-item)');
   if(!answersItems){return;}
-  var asNoAnswer=$('#question'+qID+' .asterisk:not(:empty)').length; // Unsure
+  var asNoAnswer=$('#question'+qID+' .asterisk:not(:empty)').length==0; // Unsure
+  console.log(asNoAnswer);
   $(answersItems).each(function(){
     var dropdownItem=$(this).find("select");
     var starsHtmlElement="<div class='radiostars-list answers-list noread' aria-hidden='true'>";
+    if(asNoAnswer){
+      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";
+    }
     $(this).find("option").each(function(){
       if($(this).attr("value").trim()!=""){
         starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+$(this).text().trim()+"'></div>";
       }
     });
+
     starsHtmlElement= starsHtmlElement+"</div>";
     $(this).find("select").after(starsHtmlElement);
     var starsElement=$(this).find('.radiostars-list');
