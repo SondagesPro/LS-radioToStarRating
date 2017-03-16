@@ -100,17 +100,15 @@ function doRadioToStarRating(qID) {
  * @author Denis Chenu (Shnoulle)
  * @param {number} qId The qid of the question where apply.
  */
-function doArrayToStarRating(qID) {
+function doArrayToStarRating(qID,noAnswer) {
   //~ // Return quick
   var answersItems=$('#question'+qID+' .dropdown-item:not(.starred-item)');
   if(!answersItems){return;}
-  var asNoAnswer=$('#question'+qID+' .asterisk:not(:empty)').length==0; // Unsure
-  console.log(asNoAnswer);
   $(answersItems).each(function(){
     var dropdownItem=$(this).find("select");
     var starsHtmlElement="<div class='radiostars-list answers-list noread' aria-hidden='true'>";
-    if(asNoAnswer){
-      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";
+    if(noAnswer){
+      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+noAnswer+"'></div>";
     }
     $(this).find("option").each(function(){
       if($(this).attr("value").trim()!=""){
