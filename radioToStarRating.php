@@ -49,17 +49,21 @@ class radioToStarRating extends PluginBase {
             }
         }
         if($oEvent->get('type')=="F") {
-            $this->registerFontAwesome();
-            App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
-            App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
-            /* Must find if we must show no answer or not */
-            $oQuestion=Question::model()->findByPk(array("qid"=>$oEvent->get('qid'),'language'=>App()->getLanguage()));
-            $showNoAnswer= intval($oQuestion->mandatory!='Y' && SHOW_NO_ANSWER == 1);
-            if($showNoAnswer){
-                $showNoAnswer=json_encode(gT('No answer'));
+            $oAttributeStarRating=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'radioToStarRating'));
+            $oAttributeUseDropDown=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'use_dropdown'));
+            if($oAttributeStarRating && $oAttributeUseDropDown) {
+                $this->registerFontAwesome();
+                App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
+                App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
+                /* Must find if we must show no answer or not */
+                $oQuestion=Question::model()->findByPk(array("qid"=>$oEvent->get('qid'),'language'=>App()->getLanguage()));
+                $showNoAnswer= intval($oQuestion->mandatory!='Y' && SHOW_NO_ANSWER == 1);
+                if($showNoAnswer){
+                    $showNoAnswer=json_encode(gT('No answer'));
+                }
+                App()->clientScript->registerScript("arrayToStarRating{$oEvent->get('qid')}","doArrayToStarRating({$oEvent->get('qid')},{$showNoAnswer})",CClientScript::POS_END);
+                $oEvent->set('class',$oEvent->get('class')." radioToStarRating");
             }
-            App()->clientScript->registerScript("arrayToStarRating{$oEvent->get('qid')}","doArrayToStarRating({$oEvent->get('qid')},{$showNoAnswer})",CClientScript::POS_END);
-            $oEvent->set('class',$oEvent->get('class')." radioToStarRating");
         }
     }
 
