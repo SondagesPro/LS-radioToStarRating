@@ -32,7 +32,7 @@ This plugin use different class:
 - Hovered item have `radiostar-drained radiostar-hover fa-star` class
 - Item before hovered item have `radiostar-drained fa-star` class
 
-Then you can use you nown class, some example :
+Then you can update the default style using this class, some example :
 
 1. Add a Not-applicable item before the star (code is NA)
 

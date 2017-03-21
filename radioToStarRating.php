@@ -1,16 +1,16 @@
 <?php
 /**
- * arrayTextAdapt : a LimeSurvey plugin to update radio question type to star rating system
+ * radioToStarRating : a LimeSurvey plugin to update radio question type to star rating system
  *
  * @author Denis Chenu <denis@sondages.pro>
+ * @copyright 2016-2017 Denis Chenu <http://www.sondages.pro>
  * @copyright 2016 Advantages <https://advantages.fr/>
- * @copyright 2016 Denis Chenu <http://www.sondages.pro>
 
- * @license GPL v3
- * @version 0.0.1
+ * @license AGPL v3
+ * @version 1.0.0
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
@@ -20,7 +20,7 @@
  * GNU General Public License for more details.
  */
 
-class radioToStarRating extends PluginBase {
+class radioToStarRating extends \ls\pluginmanager\PluginBase {
     static protected $description = 'Use any radio question type to star rating.';
     static protected $name = 'radioToStarRating';
 

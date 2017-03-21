@@ -21,7 +21,7 @@
 function doRadioToStarRating(qID) {
 
   //~ // Return quick
-  var answersList=$('#question'+qID+' input.radio').closest('.radio-list:not(.starred-list)');
+  var answersList=$('#question'+qID+' .radio-item input:radio').closest('.radio-list:not(.starred-list)');
   if(!answersList){return;}
 
   var asNoAnswer=$('#question'+qID+' .noanswer-item .radio, #question'+qID+' .no-anwser-item input:radio').length;
