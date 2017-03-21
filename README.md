@@ -35,47 +35,45 @@ This plugin use different class:
 Then you can use you nown class, some example :
 
 1. Add a Not-applicable item before the star (code is NA)
-```
-.radiostar-NA:before {
-  content: "#";
-}
-.radiostar-NA.radiostar,.radiostar-NA.radiostar-rated{
-  color:#ccc;opacity:0.5;
-}
-.radiostar-NA.radiostar-hover{
-  color:#888;opacity:1;
-}
-.radiostar-NA.radiostar-rated-on{
-  color:#444;opacity:1;
-}
-```
+
+        .radiostar-NA:before {
+          content: "#";
+        }
+        .radiostar-NA.radiostar,.radiostar-NA.radiostar-rated{
+          color:#ccc;opacity:0.5;
+        }
+        .radiostar-NA.radiostar-hover{
+          color:#888;opacity:1;
+        }
+        .radiostar-NA.radiostar-rated-on{
+          color:#444;opacity:1;
+        }
 2. Use a Yes/No with [thumb up](http://fontawesome.io/icon/thumbs-up/) and [thumb down](http://fontawesome.io/icon/thumbs-down), code as YES and NO.
-```
-.radiostar-NO:before {
-  content: "\f165";
-}
-.radiostar-NO.radiostar,.radiostar-NO.radiostar-rated{
-  color:#ccc;opacity:0.5;
-}
-.radiostar-NO.radiostar-hover{
-  color:#888;opacity:1;
-}
-.radiostar-NO.radiostar-rated-on{
-  color:#444;opacity:1;
-}
-.radiostar-YES:before {
-  content: "\f164";
-}
-.radiostar-YES.radiostar,.radiostar-YES.radiostar-rated{
-  color:#ccc;opacity:0.5;
-}
-.radiostar-YES.radiostar-hover{
-  color:#888;opacity:1;
-}
-.radiostar-YES.radiostar-rated-on{
-  color:#444;opacity:1;
-}
-```
+
+        .radiostar-NO:before {
+          content: "\f165";
+        }
+        .radiostar-NO.radiostar,.radiostar-NO.radiostar-rated{
+          color:#ccc;opacity:0.5;
+        }
+        .radiostar-NO.radiostar-hover{
+          color:#888;opacity:1;
+        }
+        .radiostar-NO.radiostar-rated-on{
+          color:#444;opacity:1;
+        }
+        .radiostar-YES:before {
+          content: "\f164";
+        }
+        .radiostar-YES.radiostar,.radiostar-YES.radiostar-rated{
+          color:#ccc;opacity:0.5;
+        }
+        .radiostar-YES.radiostar-hover{
+          color:#888;opacity:1;
+        }
+        .radiostar-YES.radiostar-rated-on{
+          color:#444;opacity:1;
+        }
 
 ## Home page & Copyright
 - HomePage <http://extensions.sondages.pro/>
