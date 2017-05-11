@@ -79,6 +79,7 @@ Then you can update the default style using this class, some example :
 - HomePage <http://extensions.sondages.pro/>
 - Copyright © 2016-2017 Denis Chenu <http://www.sondages.pro>- Licence : GNU General Public License <https://www.gnu.org/licenses/agpl.html>
 - Copyright © 2016 Advantages <https://advantages.fr/>
+- Copyright © 2017 Réseaux en scène <https://www.reseauenscene.fr/>
 
 Distributed under [GNU AFFERO GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/agpl.txt) licence
 

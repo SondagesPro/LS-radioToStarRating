@@ -5,7 +5,7 @@
  * @author Denis Chenu <denis@sondages.pro>
  * @copyright 2016-2017 Denis Chenu <http://www.sondages.pro>
  * @copyright 2016 Advantages <https://advantages.fr/>
-
+ * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
  * @version 1.0.1
  *
