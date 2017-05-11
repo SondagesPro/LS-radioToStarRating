@@ -27,7 +27,7 @@ function doRadioToStarRating(qID) {
   var asNoAnswer=$('#question'+qID+' .noanswer-item .radio, #question'+qID+' .no-anwser-item input:radio').length;
   var starsHtmlElement="<div class='radiostars-list answers-list noread' aria-hidden='true'>";
   if(asNoAnswer){
-    starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+$('#question'+qID+' .noanswer-item label').html()+"'></div>";
+    starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel fa fa-ban' data-value='' title='"+htmlentities($('#question'+qID+' .noanswer-item label').html())+"'></div>";
   }
   $('#question'+qID+' input.radio').each(function(){
     if($(this).attr("value").trim()!=""){
@@ -36,6 +36,7 @@ function doRadioToStarRating(qID) {
       } else {
         var title=$("label[for='"+$(this).attr('id')+"']").text().trim();
       }
+      title=htmlentities(title);
       starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+title+"'></div>";
     }
   });
@@ -112,7 +113,7 @@ function doArrayToStarRating(qID,noAnswer) {
     }
     $(this).find("option").each(function(){
       if($(this).attr("value").trim()!=""){
-        starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+$(this).text().trim()+"'></div>";
+        starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+htmlentities($(this).text().trim())+"'></div>";
       }
     });
 
@@ -122,7 +123,7 @@ function doArrayToStarRating(qID,noAnswer) {
 
     starsElement.on("mouseout mouseover", ".radiostar", function(event){
       var thisnum=$(this).index();
-      if(asNoAnswer){thisnum--};
+      if(noAnswer){thisnum--};
       if(event.type=='mouseover'){
         starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o").addClass("radiostar-drained fa-star");
         starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o").addClass("radiostar-drained radiostar-hover fa-star");
