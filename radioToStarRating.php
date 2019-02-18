@@ -3,11 +3,11 @@
  * radioToStarRating : a LimeSurvey plugin to update radio question type to star rating system
  *
  * @author Denis Chenu <denis@sondages.pro>
- * @copyright 2016-2017 Denis Chenu <http://www.sondages.pro>
+ * @copyright 2016-2019 Denis Chenu <http://www.sondages.pro>
  * @copyright 2016 Advantages <https://advantages.fr/>
  * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
- * @version 1.0.1
+ * @version 2.0.0
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,7 @@
  * GNU General Public License for more details.
  */
 
-class radioToStarRating extends \ls\pluginmanager\PluginBase {
+class radioToStarRating extends PluginBase {
     static protected $description = 'Use any radio question type to star rating.';
     static protected $name = 'radioToStarRating';
 
@@ -91,7 +91,7 @@ class radioToStarRating extends \ls\pluginmanager\PluginBase {
                 'sortorder'=>150,
                 'inputtype'=>'switch',
                 'default'=>0,
-                'help'=>$this->_translate('Tou need to check use dropdown attribute too.'),
+                'help'=>$this->_translate('With array, you need to check use dropdown attribute too.'),
                 'caption'=>$this->_translate('Show like a star rating.'),
             ),
         );
