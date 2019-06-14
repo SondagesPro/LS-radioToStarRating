@@ -7,7 +7,7 @@
  * @copyright 2016 Advantages <https://advantages.fr/>
  * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
- * @version 2.0.0
+ * @version 2.1.0
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by

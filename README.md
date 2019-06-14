@@ -19,6 +19,10 @@ The plugin can be activated for List (Radio) question type and Array question ty
 
 With LimeSurvey version lesser than 3.0 : you must use [legacy](https://gitlab.com/SondagesPro/QuestionSettingsType/radioToStarRating/tree/legacy) branch.
 
+### Extra options
+
+- Adding `half-stars` to _Css class_ attribute to have and half star for each choice
+
 ### Adaptation
 
 The plugin is used to show star, using [FontAwesome icon](http://fontawesome.io/icons/). You can use css to use your own icon or character.

@@ -1,8 +1,9 @@
 /**
  * @file function to use radio button as star rating
  * @author Denis Chenu
+ * @version 1.1.0
  * @copyright 2016 Advantages <https://advantages.fr/>
- * @copyright 2016-2018 Denis Chenu <http://www.sondages.pro>
+ * @copyright 2016-2019 Denis Chenu <http://www.sondages.pro>
  * @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat (MIT)
  */
 
@@ -22,8 +23,9 @@ function doRadioToStarRating(qID) {
   var asNoAnswer=$('#question'+qID+' .noanswer-item  input:radio, #question'+qID+' .no-anwser-item input:radio').length;
   var starsHtmlElement="<div class='radiostars-list answers-list' aria-hidden='true'>";
   if(asNoAnswer){
-    starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel text-danger fa fa-ban' data-value='' title='"+$('#question'+qID+' .no-anwser-item label').text()+"' data-content='"+htmlentities($('#question'+qID+' .no-anwser-item label').html())+"'></div>";
+    starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel text-muted fa fa-ban' data-value='' title='"+$('#question'+qID+' .no-anwser-item label').text()+"' data-content='"+htmlentities($('#question'+qID+' .no-anwser-item label').html())+"'></div>";
   }
+  var alternate = 'odd';
   $('#question'+qID+' input:radio').each(function(){
     if($(this).attr("value").trim()!=""){
       if($("[id='label-"+$(this).attr('id')+"']").length){
@@ -34,7 +36,8 @@ function doRadioToStarRating(qID) {
         var datatooltip=$("label[for='"+$(this).attr('id')+"']").html().trim();
       }
       datatooltip=htmlentities(datatooltip);
-      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+title+"' data-content='"+datatooltip+"'></div>";
+      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" radiostar-"+alternate+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+title+"' data-content='"+datatooltip+"'></div>";
+      if(alternate == 'odd') { alternate = 'even'; } else { alternate = 'odd'; }
     }
   });
   starsHtmlElement= starsHtmlElement+"</div>";
@@ -115,7 +118,7 @@ function doArrayToStarRating(qID,noAnswer) {
     var dropdownItem=$(this).find("select");
     var starsHtmlElement="<div class='radiostars-list answers-list' aria-hidden='true'>";
     if(noAnswer){
-      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel text-danger fa fa-ban' data-value='' title='"+noAnswer+"' data-content='"+noAnswer+"'></div>";
+      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-cancel text-muted fa fa-ban' data-value='' title='"+noAnswer+"' data-content='"+noAnswer+"'></div>";
     }
     $(this).find("option").each(function(){
       if($(this).attr("value").trim()!=""){
@@ -186,3 +189,9 @@ function doArrayToStarRating(qID,noAnswer) {
     });
   });
 }
+$(document).on("mouseenter",".radiostar-cancel",function(e){
+  $(this).addClass("text-danger").removeClass("text-muted");
+});
+$(document).on("mouseleave",".radiostar-cancel",function(e){
+  $(this).addClass("text-muted").removeClass("text-danger");
+});
