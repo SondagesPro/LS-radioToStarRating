@@ -1,6 +1,6 @@
 # radioToStarRating #
 
-A plugin for LimeSurvey to set any radio list to star rating system, or use another character.
+A plugin for LimeSurvey to set any radio list to star rating system, or use another character. You can see a [demonstration on demo.sondages.pro](https://demo.sondages.pro/452542?newtest=Y).
 
 ## Installation
 
