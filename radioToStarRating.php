@@ -7,7 +7,7 @@
  * @copyright 2016 Advantages <https://advantages.fr/>
  * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
- * @version 2.1.0
+ * @version 2.1.1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -32,6 +32,9 @@ class radioToStarRating extends PluginBase {
 
     public function beforeQuestionRender()
     {
+        if (!$this->getEvent()) {
+            throw new CHttpException(403);
+        }
         $oEvent=$this->getEvent();
         if($oEvent->get('type')=="L")
         {
@@ -84,6 +87,9 @@ class radioToStarRating extends PluginBase {
      */
     public function addStarRatingAttribute()
     {
+        if (!$this->getEvent()) {
+            throw new CHttpException(403);
+        }
         $radioToStarRatingAttributes = array(
             'radioToStarRating'=>array(
                 'types'=>'LF', /* Radio + Array radio */
