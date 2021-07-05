@@ -3,11 +3,11 @@
  * radioToStarRating : a LimeSurvey plugin to update radio question type to star rating system
  *
  * @author Denis Chenu <denis@sondages.pro>
- * @copyright 2016-2019 Denis Chenu <http://www.sondages.pro>
+ * @copyright 2016-2021 Denis Chenu <http://www.sondages.pro>
  * @copyright 2016 Advantages <https://advantages.fr/>
  * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
- * @version 2.1.1
+ * @version 2.2.0
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,12 +41,9 @@ class radioToStarRating extends PluginBase {
             $oAttributeDisplayColumns=QuestionAttribute::model()->find("qid=:qid AND attribute=:attribute",array(":qid"=>$oEvent->get('qid'),":attribute"=>"display_columns"));
             $oAttributeCssClass=QuestionAttribute::model()->find("qid=:qid AND attribute=:attribute",array(":qid"=>$oEvent->get('qid'),":attribute"=>"cssclass"));
             $oAttributeStarRating=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'radioToStarRating'));
-
             if( ($oAttributeStarRating && $oAttributeStarRating->value) || ($oAttributeDisplayColumns && trim($oAttributeDisplayColumns->value)=="star") || ($oAttributeCssClass && (trim($oAttributeCssClass->value)=="starRating")) )
             {
-                $this->registerFontAwesome();
-                App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
-                App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
+                $this->registerNeededAssets();
                 App()->clientScript->registerScript("radioToStarRating{$oEvent->get('qid')}","doRadioToStarRating({$oEvent->get('qid')})",CClientScript::POS_END);
                 $oEvent->set('class',$oEvent->get('class')." radioToStarRating");
             }
@@ -55,9 +52,7 @@ class radioToStarRating extends PluginBase {
             $oAttributeStarRating=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'radioToStarRating'));
             $oAttributeUseDropDown=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'use_dropdown'));
             if($oAttributeStarRating && $oAttributeUseDropDown) {
-                $this->registerFontAwesome();
-                App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
-                App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
+                $this->registerNeededAssets();
                 /* Must find if we must show no answer or not */
                 $oQuestion=Question::model()->findByPk(array("qid"=>$oEvent->get('qid'),'language'=>App()->getLanguage()));
                 $showNoAnswer= intval($oQuestion->mandatory!='Y' && SHOW_NO_ANSWER == 1);
@@ -70,6 +65,23 @@ class radioToStarRating extends PluginBase {
         }
     }
 
+    /**
+     * Register needed script and css
+     */
+    private function registerNeededAssets()
+    {
+        $this->registerFontAwesome();
+        if(LS_Twig_Extension::getTemplateForRessource("scripts/radioToStarRating.js")) {
+            LS_Twig_Extension::registerTemplateScript("scripts/radioToStarRating.js");
+        } else {
+            App()->clientScript->registerScriptFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.js'));
+        }
+        if(LS_Twig_Extension::getTemplateForRessource("scripts/radioToStarRating.css")) {
+            LS_Twig_Extension::registerTemplateCssFile("scripts/radioToStarRating.css");
+        } else {
+            App()->clientScript->registerCssFile(App()->assetManager->publish(dirname(__FILE__) . '/assets/radioToStarRating.css'));
+        }
+    }
     /**
      * register then Font awesome is not already registered
      */

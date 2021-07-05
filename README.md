@@ -4,11 +4,17 @@ A plugin for LimeSurvey to set any radio list to star rating system, or use anot
 
 ## Installation
 
+This plugin need LimeSurvey 3.0 and up. This plugin was tested on 3.25 and 5.0.7.
+
+With LimeSurvey version lesser than 3.0 : you must use [legacy](https://gitlab.com/SondagesPro/QuestionSettingsType/radioToStarRating/tree/legacy) branch.
+
 ### Via GIT
-- Go to your LimeSurvey Directory (version up to 3.0)
+
+- Go to your LimeSurvey Directory 
 - Clone with Submodule in plugins/radioToStarRating directory : `git clone https://gitlab.com/SondagesPro/QuestionSettingsType/radioToStarRating.git radioToStarRating`
 
 ### Via ZIP dowload
+
 - Download <http://dl.sondages.pro/radioToStarRating.zip>
 - Extract : `unzip radioToStarRating.zip`
 - Move the directory to plugins/ directory inside LimeSUrvey
@@ -16,8 +22,6 @@ A plugin for LimeSurvey to set any radio list to star rating system, or use anot
 ## Documentation
 
 The plugin can be activated for List (Radio) question type and Array question type. With Array question type: you must set 'Use dropdown presentation' to yes.
-
-With LimeSurvey version lesser than 3.0 : you must use [legacy](https://gitlab.com/SondagesPro/QuestionSettingsType/radioToStarRating/tree/legacy) branch.
 
 ### Extra options
 
@@ -82,9 +86,16 @@ Then you can update the default style using this class, some example :
           color:#444;opacity:1;
         }
 
+### Css and javascript replacement
+
+If you need a complete replacement of css and javascript : you can put your file in theme
+
+- `scripts/radioToStarRating.js` for javascript
+- `css/radioToStarRating.css` for css
+
 ## Home page & Copyright
 - HomePage <http://extensions.sondages.pro/>
-- Copyright © 2016-2019 Denis Chenu <http://www.sondages.pro>- Licence : GNU General Public License <https://www.gnu.org/licenses/agpl.html>
+- Copyright © 2016-2021 Denis Chenu <http://www.sondages.pro>- Licence : GNU General Public License <https://www.gnu.org/licenses/agpl.html>
 - Copyright © 2016 Advantages <https://advantages.fr/>
 - Copyright © 2017 Réseaux en scène <https://www.reseauenscene.fr/>
 
