@@ -7,7 +7,7 @@
  * @copyright 2016 Advantages <https://advantages.fr/>
  * @copyright 2017 Réseaux en scène <https://www.reseauenscene.fr/>
  * @license AGPL v3
- * @version 2.2.0
+ * @version 2.2.1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -51,7 +51,7 @@ class radioToStarRating extends PluginBase {
         if($oEvent->get('type')=="F") {
             $oAttributeStarRating=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'radioToStarRating'));
             $oAttributeUseDropDown=QuestionAttribute::model()->find('qid=:qid and attribute=:attribute',array(':qid'=>$this->getEvent()->get('qid'),':attribute'=>'use_dropdown'));
-            if($oAttributeStarRating && $oAttributeUseDropDown) {
+            if($oAttributeStarRating && $oAttributeStarRating->value && $oAttributeUseDropDown && $oAttributeUseDropDown->value) {
                 $this->registerNeededAssets();
                 /* Must find if we must show no answer or not */
                 $oQuestion=Question::model()->findByPk(array("qid"=>$oEvent->get('qid'),'language'=>App()->getLanguage()));
