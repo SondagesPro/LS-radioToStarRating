@@ -36,7 +36,10 @@ function doRadioToStarRating(qID) {
         var datatooltip=$("label[for='"+$(this).attr('id')+"']").html().trim();
       }
       datatooltip=htmlentities(datatooltip);
-      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" radiostar-"+alternate+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+title+"' data-content='"+datatooltip+"'></div>";
+      if($(this).attr('value') == "NA")
+        starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-na text-warning radiostar-"+$(this).attr('value')+" fa fa-ban' data-value='"+$(this).attr('value')+"' title='"+title+"' data-content='"+datatooltip+"'></div>";
+	    else
+        starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" radiostar-"+alternate+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+title+"' data-content='"+datatooltip+"'></div>";
       if(alternate == 'odd') { alternate = 'even'; } else { alternate = 'odd'; }
     }
   });
@@ -71,7 +74,7 @@ function doRadioToStarRating(qID) {
     }
   });
   /* Click on star events */
-  starsElement.on("click", ".radiostar", function(event){
+  starsElement.on("click", ".radiostar, .radiostar-na", function(event){
     var thisnum=$(this).index();
     var thischoice=$(this).data("value");
     answersList.find("input:radio[value='"+thischoice+"']").click();
@@ -84,21 +87,29 @@ function doRadioToStarRating(qID) {
   /* Select actual value */
   var openValue=answersList.find("input:radio:checked").val();
   if(answersList.find("input:radio:checked").length && openValue!=""){
-    var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
-    var thisnum=starsElement.find(".radiostar").index(checkedElement);
-    starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star");
-    starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star radiostar-rated-on");
+    if(openValue == "NA"){
+      starsElement.children('.radiostar-na').removeClass("text-warning").addClass("text-danger");
+    } else {
+      var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
+      var thisnum=starsElement.find(".radiostar").index(checkedElement);
+      starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star");
+      starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star radiostar-rated-on");
+    }
   }
   /* event by updating radio */
   $(document).on("click",'#question'+qID+' .answers-list input:radio',function(){
     var openValue=$(this).attr("value");
-    if(openValue!=""){
+    if(openValue!="" && openValue != "NA"){
       var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
       var thisnum=starsElement.find(".radiostar").index(checkedElement);
       starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o text-info radiostar-rated-on").addClass("radiostar-rated text-primary fa-star");
       starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star radiostar-rated-on");
-      starsElement.children('.radiostar:gt('+thisnum+')').removeClass("radiostar-rated fa-star text-primary radiostar-rated-on").addClass("fa-star-o text-info")
+      starsElement.children('.radiostar:gt('+thisnum+')').removeClass("radiostar-rated fa-star text-primary radiostar-rated-on").addClass("fa-star-o text-info");
+      starsElement.children('.radiostar-na').removeClass("text-danger").addClass("text-warning");
     }else{
+      if(openValue == "NA"){
+        starsElement.children('.radiostar-na').removeClass("text-warning").addClass("text-danger");
+      }
       starsElement.children('.radiostar').removeClass("radiostar-rated  fa-star text-primary radiostar-rated-on").addClass("fa-star-o text-info");
     }
   });
@@ -122,7 +133,10 @@ function doArrayToStarRating(qID,noAnswer) {
     }
     $(this).find("option").each(function(){
       if($(this).attr("value").trim()!=""){
-        starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+$(this).text().trim()+"' data-content='"+$(this).html().trim()+"'></div>";
+        if($(this).attr('value') == "NA")
+        	starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar-na text-warning radiostar-"+$(this).attr('value')+" fa fa-ban' data-value='"+$(this).attr('value')+"' title='"+$(this).text().trim()+"' data-content='"+$(this).html().trim()+"'></div>";
+	      else
+		      starsHtmlElement= starsHtmlElement+"<div class='radiostar-rating radiostar text-info radiostar-"+$(this).attr('value')+" fa fa-star-o' data-value='"+$(this).attr('value')+"' title='"+$(this).text().trim()+"' data-content='"+$(this).html().trim()+"'></div>";
       }
     });
 
@@ -156,8 +170,7 @@ function doArrayToStarRating(qID,noAnswer) {
       }
     });
     /* Click on star events */
-    starsElement.on("click", ".radiostar", function(event){
-      var thisnum=$(this).index();
+    starsElement.on("click", ".radiostar, .radiostar-na", function(event){
       var thischoice=$(this).data("value");
       $(dropdownItem).val(thischoice).trigger('change');
     });
@@ -168,7 +181,9 @@ function doArrayToStarRating(qID,noAnswer) {
     $(dropdownItem).addClass("hide sr-only");
     /* Select actual value */
     var openValue=$(dropdownItem).val();
-    if(openValue!=""){
+    if(openValue == "NA"){
+      starsElement.children('.radiostar-na').removeClass("text-warning").addClass("text-danger");
+    } else if(openValue!=""){
       var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
       var thisnum=starsElement.find(".radiostar").index(checkedElement);
       starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated text-primary fa-star");
@@ -177,13 +192,18 @@ function doArrayToStarRating(qID,noAnswer) {
     /* event by updating dropdown */
     $(document).on("change",dropdownItem,function(e){
       var openValue=$(dropdownItem).val();
-      if(openValue!=""){
+
+      if(openValue!="" && openValue != "NA"){
         var checkedElement=starsElement.find(".radiostar[data-value='"+openValue+"']");
         var thisnum=starsElement.find(".radiostar").index(checkedElement);
         starsElement.children('.radiostar:lt('+thisnum+')').removeClass("fa-star-o radiostar-rated-on text-info").addClass("radiostar-rated fa-star text-primary");
         starsElement.children('.radiostar:eq('+thisnum+')').removeClass("fa-star-o text-info").addClass("radiostar-rated fa-star text-primary radiostar-rated-on");
-        starsElement.children('.radiostar:gt('+thisnum+')').removeClass("radiostar-rated fa-star text-primary radiostar-rated-on").addClass("fa-star-o text-info")
+        starsElement.children('.radiostar:gt('+thisnum+')').removeClass("radiostar-rated fa-star text-primary radiostar-rated-on").addClass("fa-star-o text-info");
+	      starsElement.children('.radiostar-na').removeClass("text-danger").addClass("text-warning");
       }else{
+	      if(openValue == "NA"){
+          starsElement.children('.radiostar-na').removeClass("text-warning").addClass("text-danger");
+        }
         starsElement.children('.radiostar').removeClass("radiostar-rated text-primary fa-star radiostar-rated-on").addClass("fa-star-o text-info");
       }
     });

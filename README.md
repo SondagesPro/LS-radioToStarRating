@@ -4,7 +4,9 @@ A plugin for LimeSurvey to set any radio list to star rating system, or use anot
 
 ## Installation
 
-This plugin need LimeSurvey 3.0 and up. This plugin was tested on 3.25 and 5.0.7.
+This plugin need LimeSurvey 6.0 and up. This plugin was tested on 6.15.
+
+With LimeSurvey version between 3 and 5: you need the [original](https://github.com/SondagesPro/LS-radioToStarRating)
 
 With LimeSurvey version lesser than 3.0 : you must use [legacy](https://gitlab.com/SondagesPro/QuestionSettingsType/radioToStarRating/tree/legacy) branch.
 
@@ -15,7 +17,7 @@ With LimeSurvey version lesser than 3.0 : you must use [legacy](https://gitlab.c
 
 ### Via ZIP dowload
 
-- Download <http://dl.sondages.pro/radioToStarRating.zip>
+- Download <https://github.com/Naruto-kyun/LS-radioToStarRating/archive/refs/heads/master.zip>
 - Extract : `unzip radioToStarRating.zip`
 - Move the directory to plugins/ directory inside LimeSUrvey
 
@@ -26,6 +28,8 @@ The plugin can be activated for List (Radio) question type and Array question ty
 ### Extra options
 
 - Adding `half-stars` to _Css class_ attribute to have and half star for each choice
+
+- An item with NA id at end allow to have mandatory question with an opt-out option
 
 ### Adaptation
 
