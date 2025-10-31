@@ -112,8 +112,8 @@ function doRadioToStarRating(qID) {
  */
 function doArrayToStarRating(qID,noAnswer) {
   //~ // Return quick
-  var answersItems=$('#question'+qID+' .dropdown-item:not(.starred-item)');
-  if(!answersItems){return;}
+  var answersItems=$('#question'+qID).find('.dropdown-item:not(.starred-item), .ls-dropdown-item:not(.starred-item)');
+  if(!answersItems.length){return;}
   $(answersItems).each(function(){
     var dropdownItem=$(this).find("select");
     var starsHtmlElement="<div class='radiostars-list answers-list' aria-hidden='true'>";
