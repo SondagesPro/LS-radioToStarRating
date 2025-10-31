@@ -113,7 +113,7 @@ function doRadioToStarRating(qID) {
 function doArrayToStarRating(qID,noAnswer) {
   //~ // Return quick
   var answersItems=$('#question'+qID+' .dropdown-item:not(.starred-item), #question'+qID+' .ls-dropdown-item:not(.starred-item)');
-  if(!answersItems){return;}
+  if(!answersItems.length){return;}
   $(answersItems).each(function(){
     var dropdownItem=$(this).find("select");
     var starsHtmlElement="<div class='radiostars-list answers-list' aria-hidden='true'>";
