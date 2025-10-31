@@ -95,9 +95,10 @@ If you need a complete replacement of css and javascript : you can put your file
 
 ## Home page & Copyright
 - HomePage <http://extensions.sondages.pro/>
-- Copyright © 2016-2021 Denis Chenu <http://www.sondages.pro>- Licence : GNU General Public License <https://www.gnu.org/licenses/agpl.html>
+- Copyright © 2016-2025 Denis Chenu <http://www.sondages.pro>- Licence : GNU General Public License <https://www.gnu.org/licenses/agpl.html>
 - Copyright © 2016 Advantages <https://advantages.fr/>
 - Copyright © 2017 Réseaux en scène <https://www.reseauenscene.fr/>
+- Copyright © 2025 Code contributors <https://github.com/SondagesPro/LS-radioToStarRating/graphs/contributors>
 
 Distributed under [GNU AFFERO GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/agpl.txt) licence
 

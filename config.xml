@@ -4,11 +4,11 @@
         <name>radioToStarRating</name>
         <type>plugin</type>
         <creationDate>2016-06-06</creationDate>
-        <lastUpdate>2021-06-05</lastUpdate>
-        <author>Denis Chenu</author>
-        <authorUrl>https://extensions.sondages.pro/</authorUrl>
+        <lastUpdate>2025-10-31</lastUpdate>
+        <author>Denis Chenu and contributors</author>
+        <authorUrl>https://github.com/SondagesPro/LS-radioToStarRating/graphs/contributors</authorUrl>
         <supportUrl>https://www.sondages.pro/contact</supportUrl>
-        <version>2.2.1</version>
+        <version>2.3.0</version>
         <license>GNU General Public License v3.0</license>
         <description><![CDATA[update radio question type to star rating system]]></description>
     </metadata>

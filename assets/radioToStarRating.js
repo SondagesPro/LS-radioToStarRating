@@ -1,10 +1,10 @@
 /**
  * @file function to use radio button as star rating
- * @author Denis Chenu
- * @version 1.1.0
+ * @author Denis Chenu and contributors
+ * @version 2.3.0
  * @copyright 2016 Advantages <https://advantages.fr/>
- * @copyright 2016-2019 Denis Chenu <http://www.sondages.pro>
- * @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat (MIT)
+ * @copyright 2016-2025 Denis Chenu <http://www.sondages.pro>
+ * @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0
  */
 
 
